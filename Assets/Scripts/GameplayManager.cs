@@ -38,7 +38,7 @@ public class GameplayManager : MonoBehaviour {
     public void DeleteLive(Direction direction)
     {
         if (direction == Direction.Left) leftPlayerLives -= 1;
-        rightPlayerLives -= 1;
+        else rightPlayerLives -= 1;
 
         if(leftPlayerLives == 0 || rightPlayerLives == 0)
         {
