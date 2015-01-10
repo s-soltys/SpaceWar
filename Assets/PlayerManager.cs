@@ -3,24 +3,46 @@ using System.Collections;
 
 public class PlayerManager : MonoBehaviour {
 
+	// it doesnt work well
 	public bool Deploying;
 	public SpaceshipColor ChoosenColor;
 
-	public Direction ChoosenDirection;
 
+	// tags for player 1 and 2 to decide in the start function which ChoosenDirection should be choosen
+//	public Direction ChoosenDirection;
 
 	public string ChoosenPattern;
-	
-//	public Spaceship ChoosenShip;
+
 	
 	public SpaceshipSpawn Yes;
 
 
 
-	public void Desploying(){
-		Deploying = true;
+	public float shootCooldown;
+
+	public float shootingRate = 1f;
+
+	public bool CanAttack
+	{
+		get
+		{
+			return shootCooldown <= 0f;
+		}
 	}
-	
+
+	void Start () {
+		
+		shootCooldown = 0f;
+	}
+
+	public void Update (){
+		if (shootCooldown > 0)
+		{
+			shootCooldown -= Time.deltaTime;
+		}
+
+		}
+
 
 
 
@@ -42,16 +64,7 @@ public class PlayerManager : MonoBehaviour {
 		Deploying = true;
 		}
 
-
-
-//
-//	public void Startthis(Spaceship now){
-//		now.color = ChoosenColor;
-//
-//		Instantiate (now);
-//		now.Deploy();
-//		}
-
+	
 
 
 
@@ -87,39 +100,53 @@ public class PlayerManager : MonoBehaviour {
 
 
 	public void Player1Planet1(){
-
+		if (CanAttack) {
+		shootCooldown = shootingRate;
 		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Right, 0, 0);
 		Deploying = false;
+			}
 	}
 	public void Player1Planet2(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Right, 0, 1);
+		if (CanAttack) {
+		shootCooldown = shootingRate;
+		Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Right, 0, 1);
 		Deploying = false;
+				}
 	}
 	public void Player1Planet3(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Right, 0, 2);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Right, 0, 2);
+						Deploying = false;
+				}
 	}
 	public void Player1Planet4(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Right, 0, 3);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Right, 0, 3);
+						Deploying = false;
+				}
 	}
 	public void Player1Planet5(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Right, 0, 4);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Right, 0, 4);
+						Deploying = false;
+				}
 	}
 	public void Player1Planet6(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Right, 0, 5);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Right, 0, 5);
+						Deploying = false;
+				}
 	}
 	public void Player1Planet7(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Right, 0, 6);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Right, 0, 6);
+						Deploying = false;
+				}
 	}
 
 
@@ -133,39 +160,53 @@ public class PlayerManager : MonoBehaviour {
 
 
 	public void Player2Planet1(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Left, 7, 0);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Left, 9, 0);
+						Deploying = false;
+				}
 	}
 	public void Player2Planet2(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Left, 7, 1);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Left, 9, 1);
+						Deploying = false;
+				}
 	}
 	public void Player2Planet3(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Left, 7, 2);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Left, 9, 2);
+						Deploying = false;
+				}
 	}
 	public void Player2Planet4(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Left, 7, 3);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Left, 9, 3);
+						Deploying = false;
+				}
 	}
 	public void Player2Planet5(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Left, 7, 4);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Left, 9, 4);
+						Deploying = false;
+				}
 	}
 	public void Player2Planet6(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Left, 7, 5);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Left, 9, 5);
+						Deploying = false;
+				}
 	}
 	public void Player2Planet7(){
-		
-		Yes.Spawn (ChoosenColor,ChoosenPattern,Direction.Left, 7, 6);
-		Deploying = false;
+		if (CanAttack) {
+						shootCooldown = shootingRate;
+						Yes.Spawn (ChoosenColor, ChoosenPattern, Direction.Left, 9, 6);
+						Deploying = false;
+				}
 	}
 
 
