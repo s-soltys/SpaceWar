@@ -5,17 +5,15 @@ public class DiagonalSpaceship : Spaceship {
 
     public int verticalDirection = 1;
 
-    public override GridPosition nextPosition
+    public override GridPosition GetNextPosition(GridPosition p)
     {
-        get
+        var next = new GridPosition(p.X + HorizontalChange, p.Y + verticalDirection);
+        if (!next.IsValidY)
         {
-            var next = new GridPosition(currentPosition.X + HorizontalChange, currentPosition.Y + verticalDirection);
-            if (!next.IsValidY)
-            {
-                verticalDirection = -verticalDirection;
-                next = new GridPosition(currentPosition.X + HorizontalChange, currentPosition.Y + verticalDirection);
-            }
-            return next;
+            verticalDirection = -verticalDirection;
+            next = new GridPosition(p.X + HorizontalChange, p.Y + verticalDirection);
         }
+        return next;
     }
+
 }

@@ -3,35 +3,29 @@ using System.Collections;
 
 public class Spaceship : MonoBehaviour {
 
-    public GridPosition currentPosition;
-    public Direction direction;
-    public float frequency;
-    public SpaceshipColor color;
-
+    private GridPosition currentPosition;
+    private Direction direction;
+    private SpaceshipColor color;
     public Sprite[] spriteReferences;
 
-    public virtual GridPosition nextPosition
+
+    public virtual GridPosition GetNextPosition(GridPosition p)
     {
-        get
-        {
-            return currentPosition;
-        }
+        return p;
     }
 
-    public virtual void Deploy(GridPosition initialPosition, Direction direction)
+    public virtual void Deploy(GridPosition initialPosition, Direction direction, SpaceshipColor color)
     {
         this.direction = direction;
-        SetPositionOnGrid(initialPosition, 0);
-        StartCoroutine(MovementCoroutine(frequency));
-        SetSprite();
+        this.currentPosition = initialPosition;
+        this.color = color;
 
+        SetPositionOnGrid(initialPosition, 0);
+
+        GetComponent<SpriteRenderer>().sprite = GetSpriteForColor(color);
         GetComponent<Collider2D>().enabled = true;
     }
 
-    private void SetSprite()
-    {
-        GetComponent<SpriteRenderer>().sprite = GetSpriteForColor(color);
-    }
 
     private Sprite GetSpriteForColor(SpaceshipColor color)
     {
@@ -53,10 +47,20 @@ public class Spaceship : MonoBehaviour {
         while (true)
         {
             yield return new WaitForSeconds(frequency);
+            Move(frequency);
+        }
+    }
 
-            SetPositionOnGrid(nextPosition, frequency / 2);
+    public void Move(float frequency)
+    {
+        var nextPosition = GetNextPosition(currentPosition);
+        SetPositionOnGrid(nextPosition, frequency);
+        currentPosition = nextPosition;
 
-            currentPosition = nextPosition;
+        if (!GetNextPosition(currentPosition).IsValidX)
+        {
+            Destroy(this.gameObject);
+            GameplayManager.Instance.DeleteLive(direction);
         }
     }
 
@@ -89,7 +93,6 @@ public class Spaceship : MonoBehaviour {
 
             foreach(var loosingSpaceship in loosingSpaceships)
             {
-                Debug.Log("COLLISION");
                 loosingSpaceship.enabled = false;
                 Destroy(loosingSpaceship.gameObject);
                 iTween.ScaleBy(loosingSpaceship.gameObject, 2 * Vector3.one, 0.15f);
