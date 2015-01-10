@@ -14,13 +14,7 @@ public class SpaceshipSpawn : MonoBehaviour
     }
     public void Start()
     {
-        Spawn(SpaceshipColor.Yellow, "STRAIGHT", Direction.Right, 0, 1);
-        Spawn(SpaceshipColor.Blue, "DIAGONALUP", Direction.Right, 0, 2);
-        Spawn(SpaceshipColor.Red, "STRAIGHT", Direction.Right, 0, 3);
 
-        Spawn(SpaceshipColor.Yellow, "DIAGONALDOWN", Direction.Left, 9, 3);
-        Spawn(SpaceshipColor.Red, "STRAIGHT", Direction.Left, 9, 5);
-        Spawn(SpaceshipColor.Blue, "STRAIGHT", Direction.Left, 9, 6);
     }
 
     public void Spawn(SpaceshipColor color, string pattern, Direction direction, int x, int y)
@@ -33,12 +27,12 @@ public class SpaceshipSpawn : MonoBehaviour
         else if(pattern == "DIAGONALUP")
         {
             inst = Instantiate(diagonal) as GameObject;
-            diagonal.GetComponent<DiagonalSpaceship>().verticalDirection = 1;
+            diagonal.GetComponent<DiagonalSpaceship>().verticalDirection = -1;
         }
         else if(pattern == "DIAGONALDOWN")
         {
             inst = Instantiate(diagonal) as GameObject;
-            diagonal.GetComponent<DiagonalSpaceship>().verticalDirection = -1;
+            diagonal.GetComponent<DiagonalSpaceship>().verticalDirection = 1;
         }
 
         inst.transform.parent = this.transform;
@@ -46,5 +40,8 @@ public class SpaceshipSpawn : MonoBehaviour
 
         ss.Deploy(new GridPosition(x, y), direction, color);
     }
+
+
+
 
 }
