@@ -22,6 +22,8 @@ public class Spaceship : MonoBehaviour {
 
         SetPositionOnGrid(initialPosition, 0);
 
+        this.gameObject.transform.Rotate(0, 0, (direction == Direction.Left) ? 0 : 180);
+
         GetComponent<SpriteRenderer>().sprite = GetSpriteForColor(color);
         GetComponent<Collider2D>().enabled = true;
     }
@@ -54,14 +56,30 @@ public class Spaceship : MonoBehaviour {
     public void Move(float frequency)
     {
         var nextPosition = GetNextPosition(currentPosition);
-        SetPositionOnGrid(nextPosition, frequency);
-        currentPosition = nextPosition;
+
+        if (nextPosition.IsValidX)
+        {
+            SetPositionOnGrid(nextPosition, frequency);
+            currentPosition = nextPosition;
+        }
 
         if (!GetNextPosition(currentPosition).IsValidX)
         {
-            Destroy(this.gameObject);
+            GetComponent<Collider2D>().enabled = false;
+            enabled = false;
+            StartCoroutine(DestroyCoroutine());
             GameplayManager.Instance.DeleteLive(direction);
         }
+    }
+
+    public IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+
+        iTween.MoveBy(gameObject, 2 * Vector3.up, 1.0f);
+        iTween.ScaleBy(gameObject, Vector3.zero, 1.0f);
+
+        Destroy(this.gameObject, 1.0f);
     }
 
     public void SetPositionOnGrid(GridPosition position, float movementTime)
@@ -96,6 +114,11 @@ public class Spaceship : MonoBehaviour {
                 loosingSpaceship.enabled = false;
                 Destroy(loosingSpaceship.gameObject);
                 iTween.ScaleBy(loosingSpaceship.gameObject, 2 * Vector3.one, 0.15f);
+            }
+
+            if (loosingSpaceships.Length > 0)
+            {
+                var item = Instantiate(GameplayManager.Instance.explosionPrefab, this.transform.position, Quaternion.identity);
             }
         }
     }
