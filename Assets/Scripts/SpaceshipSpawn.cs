@@ -41,4 +41,7 @@ public class SpaceshipSpawn : MonoBehaviour
         ss.Deploy(new GridPosition(x, y), direction);
     }
 
+
+
+
 }
