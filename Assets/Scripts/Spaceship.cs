@@ -24,24 +24,31 @@ public class Spaceship : MonoBehaviour {
 
         this.gameObject.transform.Rotate(0, 0, (direction == Direction.Left) ? 0 : 180);
 
-        GetComponent<SpriteRenderer>().sprite = GetSpriteForColor(color);
+        GetComponent<SpriteRenderer>().sprite = GetSpriteForColor(color, direction);
         GetComponent<Collider2D>().enabled = true;
     }
 
 
-    private Sprite GetSpriteForColor(SpaceshipColor color)
+    private Sprite GetSpriteForColor(SpaceshipColor color, Direction direction)
     {
+        int index = 0;
         Sprite sprite;
         switch (color)
         {
             case SpaceshipColor.Blue:
-                return spriteReferences[0];
+                index = 0;
+                break;
             case SpaceshipColor.Red:
-                return spriteReferences[1];
+                index = 1;
+                break;
             case SpaceshipColor.Yellow:
-            default:
-                return spriteReferences[2];
+                index = 2;
+                break;
         }
+
+        if (direction == Direction.Right) index += 3;
+
+        return spriteReferences[index];
     }
 
     public IEnumerator MovementCoroutine(float frequency)
