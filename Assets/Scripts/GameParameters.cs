@@ -3,5 +3,6 @@ using System.Collections;
 
 public static class GameParameters
 {
-    public static Vector2 GridSize = new Vector2(10, 7);
+    public static int GridSizeX = 10;
+    public static int GridSizeY = 7;
 }
