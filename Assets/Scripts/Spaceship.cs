@@ -22,7 +22,7 @@ public class Spaceship : MonoBehaviour {
 
         SetPositionOnGrid(initialPosition, 0);
 
-        if (direction == Direction.Left) this.gameObject.transform.Rotate(0, 0, 180);
+        this.gameObject.transform.Rotate(0, 0, (direction == Direction.Left) ? 0 : 180);
 
         GetComponent<SpriteRenderer>().sprite = GetSpriteForColor(color);
         GetComponent<Collider2D>().enabled = true;
@@ -76,7 +76,7 @@ public class Spaceship : MonoBehaviour {
     {
         yield return new WaitForSeconds(1);
 
-        iTween.MoveBy(gameObject, 2 * (direction == Direction.Left ? Vector3.down : Vector3.up), 1.0f);
+        iTween.MoveBy(gameObject, 2 * Vector3.up, 1.0f);
         iTween.ScaleBy(gameObject, Vector3.zero, 1.0f);
 
         Destroy(this.gameObject, 1.0f);
