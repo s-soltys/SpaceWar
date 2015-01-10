@@ -6,6 +6,7 @@ public class GameplayManager : MonoBehaviour {
     public int rightPlayerLives = 5;
     public float frequency;
     public GUIText scoreLabel;
+    public GameObject explosionPrefab;
 
     public static GameplayManager Instance;
 

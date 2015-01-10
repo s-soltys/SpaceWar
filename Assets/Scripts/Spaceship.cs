@@ -99,6 +99,11 @@ public class Spaceship : MonoBehaviour {
                 Destroy(loosingSpaceship.gameObject);
                 iTween.ScaleBy(loosingSpaceship.gameObject, 2 * Vector3.one, 0.15f);
             }
+
+            if (loosingSpaceships.Length > 0)
+            {
+                var item = Instantiate(GameplayManager.Instance.explosionPrefab, this.transform.position, Quaternion.identity);
+            }
         }
     }
 
