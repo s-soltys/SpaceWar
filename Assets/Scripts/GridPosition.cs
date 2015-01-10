@@ -2,11 +2,11 @@
 using System.Collections;
 using System;
 
-[Serializable]
 public struct GridPosition
 {
     public int X;
     public int Y;
+
 
     public GridPosition(int x, int y)
     {
@@ -16,12 +16,12 @@ public struct GridPosition
 
     public bool IsValidX
     {
-        get { return X > 0 && X < GameParameters.GridSizeX; }
+        get { return X >= 0 && X < GameParameters.GridSizeX; }
     }
 
     public bool IsValidY
     {
-        get { return Y > 0 && Y < GameParameters.GridSizeY; }
+        get { return Y >= 0 && Y < GameParameters.GridSizeY; }
     }
 
     public bool IsValid

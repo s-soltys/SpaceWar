@@ -3,13 +3,8 @@ using System.Collections;
 
 public class StraightSpaceship : Spaceship
 {
-
-
-    public override GridPosition nextPosition
+    public override GridPosition GetNextPosition(GridPosition p)
     {
-        get
-        {
-            return new GridPosition(currentPosition.X + HorizontalChange, currentPosition.Y);
-        }
+        return new GridPosition(p.X + HorizontalChange, p.Y);
     }
 }
