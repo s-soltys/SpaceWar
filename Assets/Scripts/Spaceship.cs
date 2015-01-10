@@ -22,6 +22,8 @@ public class Spaceship : MonoBehaviour {
 
         SetPositionOnGrid(initialPosition, 0);
 
+        if (direction == Direction.Left) this.gameObject.transform.Rotate(0, 0, 180);
+
         GetComponent<SpriteRenderer>().sprite = GetSpriteForColor(color);
         GetComponent<Collider2D>().enabled = true;
     }
