@@ -18,11 +18,6 @@ public class Spaceship : MonoBehaviour {
         }
     }
 
-    public void Start()
-    {
-        Deploy(currentPosition, direction);
-    }
-
     public virtual void Deploy(GridPosition initialPosition, Direction direction)
     {
         this.direction = direction;
