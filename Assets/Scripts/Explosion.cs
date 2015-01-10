@@ -31,6 +31,10 @@ public class Explosion : MonoBehaviour
             gameObject.transform.localScale = gameObject.transform.localScale * scaleFactor;
         }
 
+        foreach (var item in items) item.enabled = false;
+
+        yield return new WaitForSeconds(2);
+
         Destroy(gameObject);
     }
 }

@@ -15,10 +15,10 @@ public class SpaceshipSpawn : MonoBehaviour
     public void Start()
     {
         Spawn(SpaceshipColor.Yellow, "STRAIGHT", Direction.Right, 0, 1);
-        Spawn(SpaceshipColor.Blue, "STRAIGHT", Direction.Right, 0, 2);
+        Spawn(SpaceshipColor.Blue, "DIAGONALUP", Direction.Right, 0, 2);
         Spawn(SpaceshipColor.Red, "STRAIGHT", Direction.Right, 0, 3);
 
-        Spawn(SpaceshipColor.Yellow, "STRAIGHT", Direction.Left, 9, 4);
+        Spawn(SpaceshipColor.Yellow, "DIAGONALDOWN", Direction.Left, 9, 3);
         Spawn(SpaceshipColor.Red, "STRAIGHT", Direction.Left, 9, 5);
         Spawn(SpaceshipColor.Blue, "STRAIGHT", Direction.Left, 9, 6);
     }
