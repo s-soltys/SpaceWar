@@ -74,19 +74,14 @@ public class Spaceship : MonoBehaviour {
         {
             GetComponent<Collider2D>().enabled = false;
             enabled = false;
-            StartCoroutine(DestroyCoroutine());
+
             GameplayManager.Instance.DeleteLive(direction);
+            iTween.MoveBy(gameObject, 2 * Vector3.up, 1.0f);
+            iTween.ScaleBy(gameObject, Vector3.zero, 1.0f);
+            Destroy(this.gameObject, 2);
+
+            audio.Play();
         }
-    }
-
-    public IEnumerator DestroyCoroutine()
-    {
-        yield return new WaitForSeconds(1);
-
-        iTween.MoveBy(gameObject, 2 * Vector3.up, 1.0f);
-        iTween.ScaleBy(gameObject, Vector3.zero, 1.0f);
-
-        Destroy(this.gameObject, 1.0f);
     }
 
     public void SetPositionOnGrid(GridPosition position, float movementTime)
