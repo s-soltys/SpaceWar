@@ -56,14 +56,30 @@ public class Spaceship : MonoBehaviour {
     public void Move(float frequency)
     {
         var nextPosition = GetNextPosition(currentPosition);
-        SetPositionOnGrid(nextPosition, frequency);
-        currentPosition = nextPosition;
+
+        if (nextPosition.IsValidX)
+        {
+            SetPositionOnGrid(nextPosition, frequency);
+            currentPosition = nextPosition;
+        }
 
         if (!GetNextPosition(currentPosition).IsValidX)
         {
-            Destroy(this.gameObject);
+            GetComponent<Collider2D>().enabled = false;
+            enabled = false;
+            StartCoroutine(DestroyCoroutine());
             GameplayManager.Instance.DeleteLive(direction);
         }
+    }
+
+    public IEnumerator DestroyCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+
+        iTween.MoveBy(gameObject, 2 * (direction == Direction.Left ? Vector3.down : Vector3.up), 1.0f);
+        iTween.ScaleBy(gameObject, Vector3.zero, 1.0f);
+
+        Destroy(this.gameObject, 1.0f);
     }
 
     public void SetPositionOnGrid(GridPosition position, float movementTime)
