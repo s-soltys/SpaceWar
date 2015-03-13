@@ -16,17 +16,17 @@ public class GameplayManager : MonoBehaviour {
     }
     public void Start()
     {
-        StartCoroutine(MovementCoroutine(frequency));
+        StartCoroutine(MovementCoroutine());
     }
 
-    public IEnumerator MovementCoroutine(float frequency)
+    public IEnumerator MovementCoroutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(frequency);
+            yield return new WaitForSeconds(GameParameters.TickPeriod);
 
-            foreach (var ss in GetComponentsInChildren<DiagonalSpaceship>()) ss.Move(frequency / 2);
-            foreach (var ss in GetComponentsInChildren<StraightSpaceship>()) ss.Move(frequency / 2);
+            foreach (var ss in GetComponentsInChildren<DiagonalSpaceship>()) ss.Move(GameParameters.TickMovementTime);
+            foreach (var ss in GetComponentsInChildren<StraightSpaceship>()) ss.Move(GameParameters.TickMovementTime);
         }
     }
 
