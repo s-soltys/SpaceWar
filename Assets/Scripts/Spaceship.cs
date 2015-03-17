@@ -80,6 +80,8 @@ public class Spaceship : MonoBehaviour {
             iTween.ScaleBy(gameObject, Vector3.zero, 1.0f);
             Destroy(this.gameObject, 2);
 
+            transform.GetComponentInChildren<ParticleRenderer>().enabled = false;
+
             audio.Play();
         }
     }
