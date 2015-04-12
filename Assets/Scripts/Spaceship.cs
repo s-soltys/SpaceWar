@@ -8,7 +8,6 @@ public class Spaceship : MonoBehaviour {
     private SpaceshipColor color;
     public Sprite[] spriteReferences;
 
-
     public virtual GridPosition GetNextPosition(GridPosition p)
     {
         return p;
@@ -70,7 +69,7 @@ public class Spaceship : MonoBehaviour {
             currentPosition = nextPosition;
         }
 
-        if (!GetNextPosition(currentPosition).IsValidX)
+        if (enabled && !GetNextPosition(currentPosition).IsValidX)
         {
             GetComponent<Collider2D>().enabled = false;
             enabled = false;

@@ -43,8 +43,10 @@ public class GameplayManager : MonoBehaviour {
 
         if(leftPlayerLives == 0 || rightPlayerLives == 0)
         {
+            Update();
             enabled = false;
 
+            //TODO - game finished event
         }
     }
 
