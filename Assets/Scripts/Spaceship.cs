@@ -45,7 +45,7 @@ public class Spaceship : MonoBehaviour {
                 break;
         }
 
-        if (direction == Direction.Right) index += 3;
+        //if (direction == Direction.Right) index += 3;
 
         return spriteReferences[index];
     }

@@ -62,7 +62,6 @@ public class PlayerManager : MonoBehaviour
         var e = eventData as PointerEventData;
 
         var totalDelta = (e.position - selectPosition) / Screen.width;
-        Debug.Log(Time.deltaTime + " " + totalDelta);
         
         var choosenPattern = string.Empty;
         if (totalDelta.y > flickThreshold) choosenPattern = "DIAGONALUP";
