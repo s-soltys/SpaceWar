@@ -37,7 +37,7 @@ public class SpaceshipSpawn : MonoBehaviour
 
         inst.transform.parent = this.transform;
         var ss = inst.GetComponent<Spaceship>();
-
+        
         ss.Deploy(new GridPosition(x, y), direction, color);
     }
 

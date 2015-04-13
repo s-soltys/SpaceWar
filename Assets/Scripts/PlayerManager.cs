@@ -61,15 +61,14 @@ public class PlayerManager : MonoBehaviour
     {
         var e = eventData as PointerEventData;
 
+        var yPositionIndex = int.Parse(((GameObject)e.pointerDrag).name);
+
         var totalDelta = (e.position - selectPosition) / Screen.width;
-        
         var choosenPattern = string.Empty;
         if (totalDelta.y > flickThreshold) choosenPattern = "DIAGONALUP";
         else if (totalDelta.y < -flickThreshold) choosenPattern = "DIAGONALDOWN";
         else if (Mathf.Abs(totalDelta.x) > flickThreshold) choosenPattern = "STRAIGHT";
         else return;
-
-        var yPositionIndex = int.Parse(((GameObject)e.pointerDrag).name);
 
         if (CanAttack)
         {
