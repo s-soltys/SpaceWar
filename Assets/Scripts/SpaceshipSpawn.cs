@@ -27,12 +27,12 @@ public class SpaceshipSpawn : MonoBehaviour
         else if(pattern == "DIAGONALUP")
         {
             inst = Instantiate(diagonal) as GameObject;
-            diagonal.GetComponent<DiagonalSpaceship>().verticalDirection = -1;
+            inst.GetComponent<DiagonalSpaceship>().verticalDirection = -1;
         }
         else if(pattern == "DIAGONALDOWN")
         {
             inst = Instantiate(diagonal) as GameObject;
-            diagonal.GetComponent<DiagonalSpaceship>().verticalDirection = 1;
+            inst.GetComponent<DiagonalSpaceship>().verticalDirection = 1;
         }
 
         inst.transform.parent = this.transform;
