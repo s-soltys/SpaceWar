@@ -3,7 +3,7 @@ using System.Collections;
 
 public static class GameParameters
 {
-    public static GameMode Mode = GameMode.Single;
+    public static GameMode Mode = GameMode.SinglePlayer;
     public static int GridSizeX = 10;
     public static int GridSizeY = 7;
     public static float TickPeriod = 1.5f;
@@ -13,6 +13,6 @@ public static class GameParameters
 
 public enum GameMode
 {
-    Single,
+    SinglePlayer,
     SplitScreen
 }

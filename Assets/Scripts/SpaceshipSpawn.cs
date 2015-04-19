@@ -17,19 +17,19 @@ public class SpaceshipSpawn : MonoBehaviour
 
     }
 
-    public void Spawn(SpaceshipColor color, string pattern, Direction direction, int x, int y)
+    public void Spawn(SpaceshipColor color, MovementPattern pattern, Direction direction, int x, int y)
     {
         GameObject inst = null;
-        if(pattern == "STRAIGHT")
+        if(pattern == MovementPattern.STRAIGHT)
         {
             inst = Instantiate(straight) as GameObject;
         }
-        else if(pattern == "DIAGONALUP")
+        else if(pattern == MovementPattern.DIAGONALUP)
         {
             inst = Instantiate(diagonal) as GameObject;
             inst.GetComponent<DiagonalSpaceship>().verticalDirection = -1;
         }
-        else if(pattern == "DIAGONALDOWN")
+        else if(pattern == MovementPattern.DIAGONALDOWN)
         {
             inst = Instantiate(diagonal) as GameObject;
             inst.GetComponent<DiagonalSpaceship>().verticalDirection = 1;

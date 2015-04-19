@@ -5,7 +5,7 @@ public class GameMenu : MonoBehaviour
 {
     public void StartSinglePlayer()
     {
-        GameParameters.Mode = GameMode.Single;
+        GameParameters.Mode = GameMode.SinglePlayer;
         Application.LoadLevel("Game");
     }
 

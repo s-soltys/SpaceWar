@@ -8,12 +8,14 @@ public class PlayerManager : MonoBehaviour
 
     private Vector2 selectPosition;
 
+    public bool tryAttachAI;
     public int startingGridPosition;
     public Direction launchDirection;
     public SpaceshipColor ChoosenColor;
     public SpaceshipSpawn Spawn;
     public float shootCooldown;
     public float shootingRate = 1f;
+    public Transform[] uiContainers;
 
     public bool CanAttack
     {
@@ -26,6 +28,11 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         shootCooldown = 0f;
+
+        if (GameParameters.Mode == GameMode.SplitScreen && tryAttachAI)
+        {
+            gameObject.AddComponent<AIPlayer>();
+        }
     }
 
     public void Update()
@@ -64,16 +71,25 @@ public class PlayerManager : MonoBehaviour
         var yPositionIndex = int.Parse(((GameObject)e.pointerDrag).name);
 
         var totalDelta = (e.position - selectPosition) / Screen.width;
-        var choosenPattern = string.Empty;
-        if (totalDelta.y > flickThreshold) choosenPattern = "DIAGONALUP";
-        else if (totalDelta.y < -flickThreshold) choosenPattern = "DIAGONALDOWN";
-        else if (Mathf.Abs(totalDelta.x) > flickThreshold) choosenPattern = "STRAIGHT";
+        var choosenPattern = MovementPattern.STRAIGHT;
+        if (totalDelta.y > flickThreshold) choosenPattern = MovementPattern.DIAGONALUP;
+        else if (totalDelta.y < -flickThreshold) choosenPattern = MovementPattern.DIAGONALDOWN;
+        else if (Mathf.Abs(totalDelta.x) > flickThreshold) choosenPattern = MovementPattern.STRAIGHT;
         else return;
 
         if (CanAttack)
         {
             shootCooldown = shootingRate;
             Spawn.Spawn(ChoosenColor, choosenPattern, launchDirection, startingGridPosition, yPositionIndex);
+        }
+    }
+
+    public void Launch(SpaceshipColor color, int planetIndex,  MovementPattern pattern)
+    {
+        if (CanAttack)
+        {
+            shootCooldown = shootingRate;
+            Spawn.Spawn(color, pattern, launchDirection, startingGridPosition, planetIndex);
         }
     }
 
