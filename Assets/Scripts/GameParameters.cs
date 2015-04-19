@@ -9,6 +9,8 @@ public static class GameParameters
     public static float TickPeriod = 1.5f;
     public static float TickMovementTime = 1.0f;
 
+    public const int LeftPlayerLives = 20;
+    public const int RightPlayerLives = 20;
 }
 
 public enum GameMode

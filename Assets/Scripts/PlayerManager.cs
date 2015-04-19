@@ -29,7 +29,7 @@ public class PlayerManager : MonoBehaviour
     {
         shootCooldown = 0f;
 
-        if (GameParameters.Mode == GameMode.SplitScreen && tryAttachAI)
+        if (GameParameters.Mode == GameMode.SinglePlayer && tryAttachAI)
         {
             gameObject.AddComponent<AIPlayer>();
         }

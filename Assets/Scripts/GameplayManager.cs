@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class GameplayManager : MonoBehaviour {
-    public int leftPlayerLives = 5;
-    public int rightPlayerLives = 5;
+    private int leftPlayerLives = 5;
+    private int rightPlayerLives = 5;
     public float frequency;
     public GUIText scoreLabel;
     public GameObject explosionPrefab;
@@ -13,6 +13,8 @@ public class GameplayManager : MonoBehaviour {
     public void Awake()
     {
         Instance = this;
+        leftPlayerLives = GameParameters.LeftPlayerLives;
+        rightPlayerLives = GameParameters.RightPlayerLives;
     }
     public void Start()
     {
@@ -45,8 +47,19 @@ public class GameplayManager : MonoBehaviour {
         {
             Update();
             enabled = false;
+            OnGameEnd();
+        }
+    }
 
-            //TODO - game finished event
+    private void OnGameEnd()
+    {
+        if (leftPlayerLives == 0)
+        {
+            Results.Show(2);
+        }
+        else
+        {
+            Results.Show(1);
         }
     }
 
