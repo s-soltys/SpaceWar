@@ -4,8 +4,10 @@ using UnityEngine.EventSystems;
 
 public class PlayerManager : MonoBehaviour
 {
+    const float shootingRate = 1f;
     const float flickThreshold = 0.1f;
 
+    private bool canAttack = true;
     private Vector2 selectPosition;
 
     public bool tryAttachAI;
@@ -13,49 +15,52 @@ public class PlayerManager : MonoBehaviour
     public Direction launchDirection;
     public SpaceshipColor ChoosenColor;
     public SpaceshipSpawn Spawn;
-    public float shootCooldown;
-    public float shootingRate = 1f;
     public Transform[] uiContainers;
-
-    public bool CanAttack
-    {
-        get
-        {
-            return shootCooldown <= 0f;
-        }
-    }
+    public UnityEngine.UI.Image colorIndicator;
+    public Color[] colors;
 
     void Start()
     {
-        shootCooldown = 0f;
-
         if (GameParameters.Mode == GameMode.SinglePlayer && tryAttachAI)
         {
             gameObject.AddComponent<AIPlayer>();
         }
+
+        ChoosenRed();
     }
 
-    public void Update()
+    public void ChooseColor(SpaceshipColor color)
     {
-        if (shootCooldown > 0)
+        switch(color)
         {
-            shootCooldown -= Time.deltaTime;
+            case SpaceshipColor.Blue:
+                ChoosenBlue();
+                break;
+            case SpaceshipColor.Red:
+                ChoosenRed();
+                break;
+            case SpaceshipColor.Yellow:
+                ChoosenYellow();
+                break;
         }
     }
 
     public void ChoosenBlue()
     {
         ChoosenColor = SpaceshipColor.Blue;
+        colorIndicator.color = colors[2];
     }
 
     public void ChoosenRed()
     {
         ChoosenColor = SpaceshipColor.Red;
+        colorIndicator.color = colors[1];
     }
 
     public void ChoosenYellow()
     {
         ChoosenColor = SpaceshipColor.Yellow;
+        colorIndicator.color = colors[0];
     }
 
     public void SelectPosition(BaseEventData eventData)
@@ -77,20 +82,27 @@ public class PlayerManager : MonoBehaviour
         else if (Mathf.Abs(totalDelta.x) > flickThreshold) choosenPattern = MovementPattern.STRAIGHT;
         else return;
 
-        if (CanAttack)
+        if (canAttack)
         {
-            shootCooldown = shootingRate;
             Spawn.Spawn(ChoosenColor, choosenPattern, launchDirection, startingGridPosition, yPositionIndex);
+            StartCoroutine(Cooldown());
         }
     }
 
     public void Launch(SpaceshipColor color, int planetIndex,  MovementPattern pattern)
     {
-        if (CanAttack)
+        if (canAttack)
         {
-            shootCooldown = shootingRate;
             Spawn.Spawn(color, pattern, launchDirection, startingGridPosition, planetIndex);
+            StartCoroutine(Cooldown());
         }
+    }
+
+    private IEnumerator Cooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(shootingRate);
+        canAttack = true;
     }
 
 }

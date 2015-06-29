@@ -36,6 +36,7 @@ public class AIPlayer : MonoBehaviour {
             var color = colors[Random.Range(0, colors.Length)];
             var index = Random.Range(0, 7);
 
+            manager.ChooseColor(color);
             manager.Launch(color, index, pattern);
         } while (true);
 	}
