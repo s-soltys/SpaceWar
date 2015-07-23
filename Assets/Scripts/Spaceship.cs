@@ -79,7 +79,7 @@ public class Spaceship : MonoBehaviour {
 
             transform.GetComponentInChildren<ParticleRenderer>().enabled = false;
 
-            audio.Play();
+            GetComponent<AudioSource>().Play();
         }
     }
 
